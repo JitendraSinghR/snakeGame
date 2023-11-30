@@ -7,10 +7,31 @@ const musicSound = new Audio("music/music.mp3");
 let scoreElement = document.getElementById("score");
 let hiScoreElement = document.getElementById("hiscore");
 
-let speed = 4;
 let score = 0;
 let lastPaintTime = 0;
 let snakeArr = [{ x: 3, y: 5 }];
+
+//Process of adding speed
+let speed = 4;
+const speedSelect = document.getElementById("speed-select");
+const speedDisplay = document.getElementById("speed-display");
+
+speedSelect.addEventListener("change", () => {
+  speed = parseInt(speedSelect.value);
+  speedDisplay.textContent = `Speed: ${speed}`;
+});
+
+
+function showCustomAlert() {
+  const customAlert = document.getElementById('customAlert');
+  customAlert.style.display = 'block';
+}
+
+function closeCustomAlert() {
+  const customAlert = document.getElementById('customAlert');
+  customAlert.style.display = 'none';
+}
+
 
 food = { x: 7, y: 9 };
 
@@ -33,9 +54,9 @@ function isCollide(snake) {
   }
   // If you bump into the wall
   if (
-    snake[0].x >= 18 ||
+    snake[0].x >= 30 ||
     snake[0].x <= 0 ||
-    snake[0].y >= 18 ||
+    snake[0].y >= 30 ||
     snake[0].y <= 0
   ) {
     return true;
@@ -50,7 +71,8 @@ function gameEngine() {
     gameOverSound.play();
     musicSound.pause();
     inputDir = { x: 0, y: 0 };
-    alert("Game Over. Press Enter to play again!");
+  
+    showCustomAlert()
     snakeArr = [{ x: 13, y: 15 }];
     musicSound.play();
     scoreElement.innerHTML = "Score: 0";
@@ -82,6 +104,7 @@ function gameEngine() {
   // Moving the snake
   for (let i = snakeArr.length - 2; i >= 0; i--) {
     snakeArr[i + 1] = { ...snakeArr[i] };
+    // The use of the spread (...) operator creates a shallow copy of the object, preventing them from referencing the same object in memory.
   }
 
   snakeArr[0].x += inputDir.x;
