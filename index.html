@@ -9,9 +9,29 @@
 
   <body>
     <div class="body">
+      <div id="speed-container">
+        <label for="speed-select" id="speed-label">Speed:</label>
+        <select name="speed" id="speed-select">
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
       <div id="score">Score: 0</div>
       <div id="hiscore">HiScore: 0</div>
       <div id="board"></div>
+    </div>
+
+    <div class="custom-alert" id="customAlert">
+      <div class="alert-content">
+        <h2>Alert</h2>
+        <p>Game Over.</p>
+        <button onclick="closeCustomAlert()">OK</button>
+      </div>
     </div>
   </body>
   <script src="script.js"></script>
