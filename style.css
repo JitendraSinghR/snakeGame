@@ -1,59 +1,165 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.body{
-    background: url("/snakeGame/img/bg.jpg"); 
-    min-height: 100vh;
-    background-size: 100vw 100vh;
+.body {
+  background: url("/img/bg.jpg");
+  min-height: 100vh;
+  background-size: 100vw 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#score {
+  position: absolute;
+  top: 9px;
+  right: 180px;
+  font-size: 40px;
+  font-weight: bold;
+}
+#speed-container {
+    position: absolute;
+    top: 9px;
+    left: 180px;
+    font-size: 24px;
+    font-weight: bold;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
-#score{
+#speed-label {
+    margin-right: 10px;
+}
+
+#speed-select {
+    font-size: 18px;
+    padding: 5px;
+}
+
+#hiscore {
+  position: absolute;
+  top: 59px;
+  right: 140px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#board {
+  background: linear-gradient(rgba(103, 155, 140, 0.595), rgb(95, 103, 128));
+  width: 90vmin;
+  height: 92vmin;
+  border: 1px solid black;
+  display: grid;
+  grid-template-rows: repeat(30, 1fr);
+  grid-template-columns: repeat(30, 1fr);
+}
+
+.snake {
+  background-color: rgb(0, 128, 30);
+  border: 0.25vmin solid white;
+  border-radius: 12px;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  animation: snakeAnimation 0.5s infinite alternate;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 50%;
     position: absolute;
-    top: 9px;
-    right: 180px;
-    font-size: 40px;
-    font-weight: bold;  
+    top: 25%;
+    left: 75%;
+  }
 }
 
-#hiscore{
+@keyframes snakeAnimation {
+  to {
+    transform: translateY(5px);
+  }
+}
+
+.food {
+    background-image: url(img/bg.jpg);
+/* background: linear-gradient(red, purple); */
+  border: 0.25vmin solid black;
+  border-radius: 6px;
+  width: 20px;
+  height: 20px;
+  
+}
+
+.head {
+  background-color: aqua;
+  border: 1px solid rgb(34, 4, 34);
+  transform: scale(1.02);
+  border-radius: 50% 50% 0 0;
+  width: 20px;
+  height: 20px;
+  position: relative;
+
+  /* Add eyes for a more realistic appearance */
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 50%;
     position: absolute;
-    top: 59px;
-    right: 140px;
-    font-size: 40px;
-    font-weight: bold;
+  }
+
+  &:before {
+    top: 25%;
+    left: 25%;
+  }
+
+  &:after {
+    top: 25%;
+    left: 50%;
+  }
 }
 
-#board{
-    background: linear-gradient(rgba(88, 171, 148, 0.595), rgb(95, 103, 128));
-    width: 90vmin;
-    height: 92vmin;
-    border: 2px solid black;
-    display: grid;
-    grid-template-rows: repeat(18, 1fr);
-    grid-template-columns: repeat(18, 1fr);
-}
 
-.head{
-    background-color: aqua;
-    border: 2px solid rgb(34, 4, 34); 
-    transform: scale(1.02);
-    border-radius: 9px;
-}
+/* custom alert */
 
-.snake{
-    background-color: purple;
-    border: .25vmin solid white;
-    border-radius: 12px;
-}
-
-.food{
-    background: linear-gradient(red, purple);
-    border: .25vmin solid black;
-    border-radius: 8px;
-}
+  .custom-alert {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #b92323;
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 500px;
+    height: 200px;
+    z-index: 1;
+  }
+  
+  .alert-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.7rem;
+    color: white;
+  }
+  button {
+    padding: 10px;
+    margin-top: 30px;
+    background-color: #42c946;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 70px;
+  }
+  
